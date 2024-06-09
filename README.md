@@ -6,7 +6,7 @@ Steps before using Nanosensus
 
 1. Basecall with dorado with `--emit-moves` and align to reference
 ```
-dorado basecaller sup path_to_fast5/ --reference fasta_ref_index --emit-moves --sort-bam > dorado.bam
+dorado basecaller sup path_to_fast5/ --reference fasta_ref_index --emit-moves > dorado.bam
 ```
 2. Align with Uncalled4 to map signal to individual reads
 ```
@@ -14,7 +14,7 @@ uncalled4 align fasta_ref_index path_to_fast5 --bam-in dorado.bam -o out.bam
 ```
 1/2. Or basecall with dorado directly into Uncalled4 with stdin
 ```
-dorado basecaller sup path_to_fast5/ --reference fasta_ref_index --emit-moves --sort-bam | uncalled4 align fasta_ref_index path_to_fast5 -o out.bam
+dorado basecaller sup path_to_fast5/ --reference fasta_ref_index --emit-moves | uncalled4 align fasta_ref_index path_to_fast5 -o out.bam
 ```
 3. Group UMIs with longread_umi or with Flexiplex
 ```
