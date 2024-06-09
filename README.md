@@ -12,7 +12,13 @@ dorado basecaller sup path_to_fast5/ --reference fasta_ref_index --emit-moves --
 ```
 uncalled4 align fasta_ref_index path_to_fast5 --bam-in dorado.bam -o out.bam
 ```
-3. Group UMIs with longread_umi; will replace with Flexiplex in the future
+3. Group UMIs with longread_umi or with Flexiplex
+```
+samtools bam2fq uncalled4.bam | flexiplex -d 10x3v3 -f 0 > reads.fastq
+# From flexiplex
+scripts/flexiplex_filter/main.py --whitelist 3M-february-2018.txt --no-inflection --outfile my_filtered_barcode_list.txt my_barcode_list.txt
+flexiplex -d 10x3v3 -k my_filtered_barcode_list.txt reads.fastq > new_reads.fastq
+```
 
 Steps from Nanosensus
 
