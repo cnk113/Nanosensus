@@ -12,9 +12,9 @@ dorado basecaller sup path_to_fast5/ --reference fasta_ref_index --emit-moves > 
 ```
 uncalled4 align fasta_ref_index path_to_fast5 --bam-in dorado.bam -o out.bam
 ```
-1/2. Or basecall with dorado directly into Uncalled4 with stdin
+1/2. Or basecall with dorado directly into Uncalled4 with stdin; make sure to download dorado model beforehand
 ```
-dorado basecaller sup path_to_fast5/ --reference fasta_ref_index --emit-moves | uncalled4 align fasta_ref_index path_to_fast5 -o out.bam
+dorado basecaller model path_to_fast5/ --reference fasta_ref_index --emit-moves | uncalled4 align fasta_ref_index path_to_fast5 -o out.bam --bam-in
 ```
 3. Group UMIs with longread_umi or with Flexiplex
 ```
