@@ -22,6 +22,8 @@ samtools bam2fq uncalled4.bam | flexiplex -d 10x3v3 -f 0 > reads.fastq
 # From flexiplex
 scripts/flexiplex_filter/main.py --whitelist 3M-february-2018.txt --no-inflection --outfile my_filtered_barcode_list.txt my_barcode_list.txt
 flexiplex -d 10x3v3 -k my_filtered_barcode_list.txt reads.fastq > new_reads.fastq
+# For just UMI
+samtools bam2fq shard_0006_uc4.bam | flexiplex -x "CAAGCAGAAGACGGCATACGAGAT" -u "??????????????????" -b "" -k "?" | flexiplex -x "GTTTGGCACCTCGATGTCG" -u "??????????????????" -x "GATCTCGGTGGTCGCCGTATCATT" -b "" -k "?" > test.fast
 ```
 
 Steps from Nanosensus
