@@ -24,13 +24,16 @@ scripts/flexiplex_filter/main.py --whitelist 3M-february-2018.txt --no-inflectio
 flexiplex -d 10x3v3 -k my_filtered_barcode_list.txt reads.fastq > new_reads.fastq
 # For just UMI
 samtools bam2fq shard_0006_uc4.bam | flexiplex -x "CAAGCAGAAGACGGCATACGAGAT" -u "??????????????????" -b "" -k "?" | flexiplex -x "GTTTGGCACCTCGATGTCG" -u "??????????????????" -x "GATCTCGGTGGTCGCCGTATCATT" -b "" -k "?" > test.fast
+# Single end UMI
+samtools bam2fq shard_0006_uc4.bam | flexiplex -x "CAAGCAGAAGACGGCATACGAGAT" -u "??????????????????" -b "" -k "?" -c -f 3 > test.fast
 ```
 
 Steps from Nanosensus
 
 4. Map the UMIs from fastq to the Uncalled4 BAM file with `map_umi.py`
-5. Generate consensus with `consensus.py` on UMI mapped BAM file
-6. Preprocess the BAM for training with `preprocess.py`
+5. Group UMI with UMICollapse
+6. Generate consensus with `consensus.py` on UMI grouped BAM file
+7. Preprocess the BAM for training with `preprocess.py`
 
 `preprocess.py` is directly replacing `model_train_custom_loop.py` while maintaining object structure of PacBio reads
 
@@ -40,10 +43,10 @@ PacBio features -> Nanopore features
 
 PW -> Mean current signal
 
-IP -> Dwell time
+IP -> Model difference
 
 Strand -> Strand
 
 CCS -> abPOA consensus
 
-SN -> Signal length
+SN -> Q-score?
